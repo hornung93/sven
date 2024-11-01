@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30. Geburtstag von Sven</title>
+    <style>
+        /* Hintergrund und Text allgemein */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('wallpaper.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #FFD700;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Große Überschrift */
+        h1 {
+            font-family: 'Verdana', sans-serif;
+            color: #00ff0d;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.70);
+        }
+
+        /* Karten-Container */
+        .card {
+            width: 80%;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Linke und rechte Spalten der Karte */
+        .column {
+            width: 50%;
+            padding: 20px;
+            color: #FFFFFF;
+        }
+
+        /* Text-Stil in den Spalten */
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-weight: 700;
+        }
+
+        /* Animationen */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Button Stil */
+        .play-pause-button {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Play-Symbol */
+        .play-icon,
+        .pause-icon {
+            position: absolute;
+            transition: opacity 0.6s ease;
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent #FFFFFF;
+            opacity: 1;
+        }
+
+        /* Pause-Symbol */
+        .pause-icon {
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+        }
+
+        .pause-icon div {
+            width: 6px;
+            height: 19px;
+            background-color: #FFFFFF;
+        }
+
+        /* Button aktiv, spielt Musik */
+        .play-pause-button.playing .play-icon {
+            opacity: 0;
+        }
+
+        .play-pause-button.playing .pause-icon {
+            opacity: 1;
+        }
+
+        /* Responsive Design: Anpassungen für kleinere Bildschirme */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .card {
+                flex-direction: column; /* Stapelt die Spalten untereinander */
+                width: 90%;
+                max-width: 90%;
+            }
+
+            .column {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+                margin: 10px 0;
+            }
+
+            .card {
+                width: 100%;
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio-Element für Hintergrundmusik -->
+    <audio id="backgroundAudio" loop>
+        <source src="Geburtstag.mp3" type="audio/mpeg">
+        Ihr Browser unterstützt das Audio-Element nicht.
+    </audio>
+
+    <!-- Große Überschrift außerhalb der Karte -->
+    <h1>Happy 30th, Sven!</h1>
+
+    <!-- Hauptcontainer für die Karte -->
+    <div class="card">
+        <!-- Linke Spalte -->
+        <div class="column">
+            <p>Lieber Sven, auf das du weiterhin neue Horizonte eroberst, Schätze entdeckst und deine Sammlung an unvergesslichen Momenten erweiterst. Bleib immer der unerschrockene Abenteurer und leidenschaftliche Trainer, der du bist.</p>
+        </div>
+
+        <!-- Rechte Spalte -->
+        <div class="column">
+            <p>Neben einem erlesenen Mahl in einem Restaurant deiner Wahl - sei es das außergewöhnliche Bratar, die delikate Min Ramen Bar, das edle Akoya oder ein anderes kulinarisches Juwel - schenken wir dir eine aufregende Reise in einen Escape-Room in der Stadt, in der Karl seine Ruhe fand.</p>
+            <p>Erlebe packende Herausforderungen in der Adventure-Box, wage dich in die düsteren Tiefen des Black Rooms oder löse die rätselhaften Geheimnisse von Cage Quest. Möge dein Abenteuer beginnen und die Rätsel mit vollem Magen und deinen Freunden gelüftet werden.</p>
+        </div>
+    </div>
+
+    <!-- Play/Pause Button für Audio -->
+    <button class="play-pause-button" onclick="toggleAudio()">
+        <div class="play-icon"></div>
+        <div class="pause-icon">
+            <div></div>
+            <div></div>
+        </div>
+    </button>
+
+    <script>
+        const audio = document.getElementById('backgroundAudio');
+        const playPauseButton = document.querySelector('.play-pause-button');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.classList.add('playing');
+            } else {
+                audio.pause();
+                playPauseButton.classList.remove('playing');
+            }
+        }
+    </script>
+
+</body>
+</html>
