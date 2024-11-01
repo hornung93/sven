@@ -24,7 +24,7 @@
         /* Große Überschrift */
         h1 {
             font-family: 'Verdana', sans-serif;
-            color: #00ff0d;
+            color: #1aac2e;
             font-size: 3em;
             text-align: center;
             margin-bottom: 20px;
@@ -78,9 +78,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /*position: fixed;
-            bottom: 20px;
-            right: 20px; */
             animation: fadeIn 1.5s ease-in-out;
         }
 
@@ -195,8 +192,8 @@
 
         <!-- Rechte Spalte -->
         <div class="column">
-            <p>Neben einem erlesenen Mahl in einem Restaurant deiner Wahl - sei es das außergewöhnliche Bratar, die delikate Min Ramen Bar, das edle Akoya oder ein anderes kulinarisches Juwel - schenken wir dir eine aufregende Reise in einen Escape-Room in der Stadt, in der Karl seine Ruhe fand.</p>
-            <p>Erlebe packende Herausforderungen in der Adventure-Box, wage dich in die düsteren Tiefen des Black Rooms oder löse die rätselhaften Geheimnisse von Cage Quest. Möge dein Abenteuer beginnen und die Rätsel mit vollem Magen und deinen Freunden gelüftet werden.</p>
+            <p>Neben einem erlesenen Mahl in einem Restaurant deiner Wahl - sei es das außergewöhnliche <a href="https://www.bratar.de/" target="_blank" style="color: #FFD700; text-decoration: underline;">Bratar</a>, die delikate <a href="https://www.instagram.com/min.ramenbar.karlsruhe/?hl=de" target="_blank" style="color: #FFD700; text-decoration: underline;">Min Ramen Bar</a>, das edle <a href="http://akoya-karlsruhe.de/" target="_blank" style="color: #FFD700; text-decoration: underline;">Akoya</a> oder ein anderes kulinarisches Juwel - schenken wir dir eine aufregende Reise in einen Escape-Room in der Stadt, in der Karl seine Ruhe fand.</p>
+            <p>Erlebe packende Herausforderungen in der <a href="https://adventurebox-karlsruhe.de/" target="_blank" style="color: #FFD700; text-decoration: underline;">Adventure-Box</a>, wage dich in die düsteren Tiefen des <a href="https://karlsruhe.blackroom-escape.de/" target="_blank" style="color: #FFD700; text-decoration: underline;">Black Rooms</a> oder löse die rätselhaften Geheimnisse von <a href="https://cagequests.de/" target="_blank" style="color: #FFD700; text-decoration: underline;">Cage Quest</a>. Möge dein Abenteuer beginnen und die Rätsel mit vollem Magen und deinen Freunden gelüftet werden.</p>
         </div>
     </div>
 
@@ -222,6 +219,16 @@
                 playPauseButton.classList.remove('playing');
             }
         }
+
+        // Versucht, das Audio automatisch abzuspielen, wenn die Seite geladen wird
+        window.addEventListener('load', () => {
+            audio.play().then(() => {
+                playPauseButton.classList.add('playing');
+            }).catch(() => {
+                // Falls der Browser das Autoplay blockiert, bleibt der Play-Button normal
+                console.log("Autoplay wurde blockiert. Benutzer muss manuell abspielen.");
+            });
+        });
     </script>
 
 </body>
